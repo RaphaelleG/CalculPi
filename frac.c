@@ -25,7 +25,7 @@ frac                frac_add(frac f1, frac f2)
 {
     uint8_t taille = mx(f1.taille, f2.taille) + 1;
     frac res = frac_alloc(taille);
-    // Réflechir sur comment gérer les retenus !!!
+    // Réflechir sur comment gérer les retenues !!!
 
 
 
@@ -36,10 +36,12 @@ frac                frac_add(frac f1, frac f2)
 
 frac                frac_calcul(int num, int den){
     frac f = frac_alloc(TAILLE);
+
+    // je suis pas sure de ça du tout ...
     unsigned long long int tmp = 0;
     unsigned long long int c;
 
-    // Marche pas à partir de i=1 car tmp dépasse les entiers,
+    // Marche pas à partir de i=1 car tmp dépasse les entiers, d'ou mon test de unsigned long long mais ça marche pas mieux
     for (size_t i = 0; i < f.taille; i++) {
         int exp = my_pow(MULT, i+1);
         c = exp *(num - tmp*den) / den;
@@ -50,6 +52,7 @@ frac                frac_calcul(int num, int den){
     frac_print(f);
     return f;
 }
+
 
 void                frac_print(frac f)
 {
