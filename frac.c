@@ -25,7 +25,7 @@ frac                frac_add(frac f1, frac f2)
 {
     uint8_t taille = mx(f1.taille, f2.taille) + 1;
     frac res = frac_alloc(taille);
-
+    // Réflechir sur comment gérer les retenus !!!
 
 
 
@@ -36,12 +36,17 @@ frac                frac_add(frac f1, frac f2)
 
 frac                frac_calcul(int num, int den){
     frac f = frac_alloc(TAILLE);
-    int tmp = 0;
+    unsigned long long int tmp = 0;
+    unsigned long long int c;
+
+    // Marche pas à partir de i=1 car tmp dépasse les entiers,
     for (size_t i = 0; i < f.taille; i++) {
         int exp = my_pow(MULT, i+1);
-        f.nombre[i] = exp *(num - tmp*den) / den;
+        c = exp *(num - tmp*den) / den;
         tmp = MULT*tmp + f.nombre[i];
+        f.nombre[i] = (int)c;
     }
+
     frac_print(f);
     return f;
 }
