@@ -2,8 +2,8 @@ NAME = main
 
 FILES = \
 			main.c \
-			frac.c \
-			utils.c \
+			# big_int.c \
+			# utils.c \
 
 OBJ = $(FILES:%.c=%.o)
 

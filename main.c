@@ -1,20 +1,18 @@
-#include "frac.h"
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 
 int main(int argc, char const *argv[]) {
 
-    // test :
-    // on essaie de calculer 2/3 avec plein de décimales
-    frac f1 = frac_calcul(2, 3);
-
-    // on fais la même pour 1/3
-    frac f2 = frac_calcul(1, 3);
-    // on additionne les deux pour avoir 1 ??
+    int a = 2147483640;
+    int b = 27;
+    printf("%d\n", a+b);
+    printf("%d\n", a+b);
 
 
-    frac_free(f1);
-    frac_free(f2);
+    printf("%d\n", a+b+LIM);
 
     return 0;
 }
