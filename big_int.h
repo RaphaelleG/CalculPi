@@ -31,7 +31,7 @@ big_int             bi_add(big_int f1, big_int f2);
 big_int             bi_minus(big_int f1, big_int f2);
 big_int             bi_fois_by_int(big_int f, int n);
 big_int             bi_div_by_int(big_int f, int n);
-big_int             bi_pow_by_int(big_int f, int n);
+
 
 big_int             bi_calcul(int num, int den);
 void                bi_print(big_int f1);

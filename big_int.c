@@ -73,10 +73,43 @@ big_int             bi_add(big_int f1, big_int f2)
     return res;
 }
 
-big_int             bi_minus(big_int f1, big_int f2);
-big_int             bi_fois_by_int(big_int f, int n);
+big_int             bi_minus(big_int f1, big_int f2)
+{
+    big_int res = bi_alloc(f1.taille);
+    for (size_t i = f.taille-1; i > -1; i--)
+    {
+        res.nombre[i] = mx(f1.nombre[i], f2.nombre[i]) - mn(f1.nombre[i], f2.nombre[i]);
+    }
+    return res;
+
+}
+
+
+// je crois que ça marche mais je ne suis pas sûre ...
+big_int             bi_fois_by_int(big_int f, int n)
+{
+    big_int res = bi_alloc(f.taille +1);
+    retenue = 0;
+    for (size_t i = res.taille-1; i >0; i++) {
+        res.nombre[i] = retenue;
+        retenue = 0;
+        for (size_t j = 0; j < n; j++) {
+            res.nombre[i]+= f.nombre[i];
+            if (res.nombre[i]<= 0)
+            {
+                retenue ++;
+                res.nombre -= LIM;
+            }
+        }
+    }
+    res.nombre[0] = retenue;
+    if (retenue == 0)
+        res = bi_case_en_moins(res);
+    return res;
+}
+
+
 big_int             bi_div_by_int(big_int f, int n);
-big_int             bi_pow_by_int(big_int f, int n);
 
 big_int             bi_calcul(int num, int den);
 
