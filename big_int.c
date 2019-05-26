@@ -76,12 +76,23 @@ big_int             bi_add(big_int f1, big_int f2)
 
 big_int             bi_minus(big_int f1, big_int f2)
 {
-    big_int res = bi_alloc(f1.taille);
+    big_int res = bi_alloc(f1.taille+1);
+    int retenue = 0;
     for (size_t i = 0; i < f1.taille ; i++)
     {
-        int j = f1.taille-1 -i;
-        res.nombre[j] = mx(f1.nombre[j], f2.nombre[j]) - mn(f1.nombre[j], f2.nombre[j]);
+        int j = res.taille-1 -i;
+        res.nombre[j] = f1.nombre[j-1];
+        if (f1.nombre[j-1] < f2.nombre[j-1])
+        {
+            retenue = 1;
+            res.nombre[j] = 10*f1.nombre[j-1];
+            // on ne gère pas le dépassement pour l'instant
+        }
+        res.nombre[j] -= f2.nombre[j-1] + retenue;
     }
+    res.nombre[0] = retenue;
+    if (retenue == 0)
+        res = bi_case_en_moins(res);
     return res;
 
 }
@@ -94,7 +105,7 @@ big_int             bi_fois_by_int(big_int f, int n)
     for (size_t i = 0; i < n; i++) {
         res = bi_add(res, f);
     }
-    bi_free(f);
+
     return res;
 }
 
@@ -108,6 +119,7 @@ big_int             bi_calcul(int num, int den)
     big_int x = bi_int_to_bi(num*MULT);
     // tmp = [0] au début
     big_int tmp = bi_alloc(1);
+    big_int tmp2;
 
     for (size_t i = 0; i < res.taille; i++)
     {
@@ -117,18 +129,25 @@ big_int             bi_calcul(int num, int den)
         printf("x = " );
         bi_print(x);
 
-        big_int f = bi_minus(x, tmp);
+        tmp2 = bi_fois_by_int(tmp, 7);
+
+        printf("tmp2 = " );
+        bi_print(tmp2);
+
+        big_int f = bi_minus(x, tmp2);
         printf("calcul f ... " );
         bi_print(f);
+
         if (i == 0)
             res.nombre[i] = f.nombre[0]/den;
         else
-            res.nombre[i] = f.nombre[i-1] * MULT/den;
+            res.nombre[i] = f.nombre[i-1] * MULT/den ;
+
         x = bi_case_en_plus(x);
+
         tmp = bi_case_en_plus(tmp);
-        tmp.nombre[i] = res.nombre[i]*den;
-        printf("tmp 2 = " );
-        bi_print(tmp);
+        tmp.nombre[i] = res.nombre[i];
+
         printf("\n" );
     }
     return res;
