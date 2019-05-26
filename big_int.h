@@ -5,7 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TAILLE  10
+#define TAILLE  4
+#define MULT    1e8
 #define LIM     2147483647
 // si bug de calcul chelou, penser à + ou - 1 dans les calculs
 
