@@ -32,6 +32,7 @@ big_int             bi_int_to_bi(int n)
     return f;
 }
 
+
 big_int             bi_case_en_plus(big_int f)
 {
     big_int f2 = bi_alloc(f.taille +1);
@@ -87,6 +88,8 @@ big_int             bi_minus(big_int f1, big_int f2)
             retenue = 1;
             res.nombre[j] = 10*f1.nombre[j-1];
             // on ne gère pas le dépassement pour l'instant
+            // si c'est plus grand que LIM ça ne marche pas
+            // Il faut trouver un autre moyen de le calculer
         }
         res.nombre[j] -= f2.nombre[j-1] + retenue;
     }
@@ -98,7 +101,6 @@ big_int             bi_minus(big_int f1, big_int f2)
 }
 
 
-// je crois que ça marche mais je ne suis pas sûre ...
 big_int             bi_fois_by_int(big_int f, int n)
 {
     big_int res = bi_alloc(f.taille);
@@ -119,6 +121,7 @@ big_int             bi_calcul(int num, int den)
     big_int x = bi_int_to_bi(num*MULT);
     // tmp = [0] au début
     big_int tmp = bi_alloc(1);
+    // tmp2 = den * tmp
     big_int tmp2;
 
     for (size_t i = 0; i < res.taille; i++)
@@ -129,7 +132,7 @@ big_int             bi_calcul(int num, int den)
         printf("x = " );
         bi_print(x);
 
-        tmp2 = bi_fois_by_int(tmp, 7);
+        tmp2 = bi_fois_by_int(tmp, den);
 
         printf("tmp2 = " );
         bi_print(tmp2);
