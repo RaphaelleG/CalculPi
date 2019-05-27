@@ -63,8 +63,13 @@ big_int             bi_add(big_int f1, big_int f2)
         res.nombre[k] = f1.nombre[k-1] + f2.nombre[k-1] + retenue;
         if (res.nombre[k] < 0)
         {
+
+        }
+        else if (res.nombre[k] >= MULT)
+        {
             retenue = 1;
-            res.nombre[k]-= LIM;
+            res.nombre[k] = res.nombre[k] % MULT;
+
         }
         else
             retenue = 0;
@@ -85,14 +90,18 @@ big_int             bi_minus(big_int f1, big_int f2)
         res.nombre[j] = f1.nombre[j-1];
         if (f1.nombre[j-1] < f2.nombre[j-1])
         {
+            res.nombre[j] -= f2.nombre[j-1] + retenue;
+            res.nombre[j] += MULT;
             retenue = 1;
-            res.nombre[j] = 10*f1.nombre[j-1];
-            // on ne gère pas le dépassement pour l'instant
-            // si c'est plus grand que LIM ça ne marche pas
-            // Il faut trouver un autre moyen de le calculer
         }
-        res.nombre[j] -= f2.nombre[j-1] + retenue;
+        else
+        {
+            res.nombre[j] -= f2.nombre[j-1] + retenue;
+            retenue = 0;
+        }
+
     }
+    printf("\n" );
     res.nombre[0] = retenue;
     if (retenue == 0)
         res = bi_case_en_moins(res);
