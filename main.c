@@ -14,7 +14,7 @@ int main(int argc, char const *argv[]) {
     //
     //
     // printf("%d\n", a+b+LIM);
-    big_int test = bi_calcul(1, 7);
+    big_int test = bi_calcul(8, 7);
     bi_print(test);
     bi_free(test);
 

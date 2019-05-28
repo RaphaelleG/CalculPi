@@ -127,7 +127,7 @@ big_int             bi_calcul(int num, int den)
 {
     // res [0, 0,... , 0]
     big_int res = bi_alloc(TAILLE);
-    big_int x = bi_int_to_bi(num*MULT);
+    big_int x = bi_int_to_bi(num);
     // tmp = [0] au début
     big_int tmp = bi_alloc(1);
     // tmp2 = den * tmp
