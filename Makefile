@@ -9,7 +9,7 @@ OBJ = $(FILES:%.c=%.o)
 
 CC ?= gcc
 
-CFLAGS = -Wall -std=c11
+CFLAGS = -g -Wall -std=c11
 # CFLAGS = -Wall -Werror -Wextra -std=c11
 
 LDLIBS = -lm -lreadline
