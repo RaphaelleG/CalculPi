@@ -52,6 +52,28 @@ big_int             bi_case_en_moins(big_int f)
     return f2;
 }
 
+int                 bi_is_eq(big_int f1, big_int f2)
+{
+    // on suppose f1.taille == f2.taille
+    for (size_t i = 0; i < f1.taille; i++)
+    {
+        if (f1.nombre[i] != f2.nombre[i])
+            return 0;
+    }
+    return 1;
+}
+int                 bi_is_sup(big_int f1, big_int f2)
+{
+    // on suppose f1.taille == f2.taille
+    for (size_t i = 0; i < f1.taille; i++)
+    {
+        if (f1.nombre[i] > f2.nombre[i])
+            return 1;
+        if (f1.nombre[i] < f2.nombre[i])
+            return 0;
+    }
+    return 1;
+}
 
 big_int             bi_add(big_int f1, big_int f2)
 {
@@ -121,7 +143,20 @@ big_int             bi_fois_by_int(big_int f, int n)
 }
 
 
-big_int             bi_div_by_int(big_int f, int n);
+int                 bi_div_int_by_bi(int n, big_int f)
+{
+    // On cherche c tel que n/(f.nombre[0] + ... +f.nombre[TAILLE-1])
+    // c = c1c2c3c4c5c6c7c8
+    int c = 0;
+    int k = 0, l = 0;
+    for (size_t i = 0; i < 9; i++)
+    {
+        k = 8-i;
+        l = pow(10, k);
+        c = c + l*dichoto(n, f, i);
+    }
+    return c;
+}
 
 big_int             bi_calcul(int num, int den)
 {
@@ -162,6 +197,9 @@ big_int             bi_calcul(int num, int den)
 
         printf("\n" );
     }
+    bi_free(x);
+    bi_free(tmp);
+    bi_free(tmp2);
     return res;
 }
 
