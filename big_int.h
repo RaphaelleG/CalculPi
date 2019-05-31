@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define TAILLE  13
+#define TAILLE  5
 #define MULT    100000000
 #define LIM     2147483647
 // si bug de calcul chelou, penser à + ou - 1 dans les calculs
@@ -24,10 +24,13 @@ void                bi_free(big_int f);
 // Pour convertir un entier simple en big_int,
 // on fait juste un tableau à une case qui vaut n
 big_int             bi_int_to_bi(int n);
+big_int             bi_int_pow_to_bi(int x, int n);
 
 // sert à ajouter une case à la fin avec un 0 dedans
 // plus ou moins équivalent à faire *10^9
 big_int             bi_case_en_plus(big_int f);
+// sert à ajouter une case au debut avec un 0 dedans
+big_int             bi_case_au_debut(big_int f);
 
 // sert à enlever une case au début qui vaut 0
 big_int             bi_case_en_moins(big_int f);
@@ -36,18 +39,18 @@ int                 bi_is_eq(big_int f1, big_int f2);
 
 int                 bi_is_sup(big_int f1, big_int f2);
 
-// addition et soustraction de deux big_int de la même taille
-// Pensez peut être a une amélioration avec possibilité d'avoir 2 tailles différentes ? Même si pas nécessaire
+// addition et soustraction de deux big_int avec modification de la taille
 big_int             bi_add(big_int f1, big_int f2);
-// Probleme avec la soustraction ou les retenues sont mal géré et ou on a des dépassement d'entier
 big_int             bi_minus(big_int f1, big_int f2);
 
 big_int             bi_fois_by_int(big_int f, int n);
+big_int             bi_fois_by_bi(big_int f1, big_int f2);
 
-int                bi_div_int_by_bi(int n, big_int f);
+
+int                 bi_div_int_by_bi(int n, big_int f);
 
 // obtenir un decimales avec autant de décimales qu'on veut
-big_int             bi_calcul(int num, int den);
+big_int             bi_calcul(int num, int den, int exp);
 void                bi_print(big_int f1);
 
 
