@@ -100,33 +100,34 @@ big_int             bi_add(big_int f1, big_int f2)
     {
         if(f1.taille == mx(f1.taille, f2.taille))
         {
-            for (size_t i = 0; i < f1.taille-f2.taille; i++)
+            int t = f1.taille-f2.taille;
+            for (size_t i = 0; i < t; i++)
                 f2 = bi_case_au_debut(f2);
         }
         else
         {
-            for (size_t i = 0; i < f2.taille-f1.taille; i++)
+            int t = f2.taille-f1.taille;
+            for (size_t i = 0; i < t; i++)
                 f1 = bi_case_au_debut(f1);
         }
     }
+
     big_int res = bi_alloc(f1.taille +1);
     int retenue = 0;
+
     for (size_t i = 0; i < res.taille-1; i++)
     {
         int k = res.taille -1 -i;
         res.nombre[k] = f1.nombre[k-1] + f2.nombre[k-1] + retenue;
-        if (res.nombre[k] < 0)
-        {
 
-        }
-        else if (res.nombre[k] >= MULT)
+        if (res.nombre[k] >= MULT)
         {
             retenue = 1;
             res.nombre[k] = res.nombre[k] % MULT;
-
         }
         else
             retenue = 0;
+
     }
     res.nombre[0] = retenue;
     if (retenue == 0)
@@ -201,7 +202,6 @@ big_int             bi_fois_by_bi(big_int f1, big_int f2)
         zeros = bi_add(zeros, tmp[i]);
         bi_free(tmp[i]);
     }
-    free(tmp);
     return zeros;
 }
 
@@ -263,7 +263,9 @@ big_int             bi_calcul(int num, int den, int exp)
             if (y.taille ==1)
                 res.nombre[i] = f.nombre[0]/y.nombre[0];
             else
+            {
                 res.nombre[i] = bi_div_int_by_bi(f.nombre[0], y);
+            }
         }
         else
         {

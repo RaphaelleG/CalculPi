@@ -15,8 +15,10 @@ int     mn(int m1, int m2)
 int     dichoto(int n, big_int f, int i)
 {
     int c = 5;
+    int a = 0;
+    int b = 10;
     big_int k = bi_int_to_bi(n);
-    for (size_t i = 0; i < f.taille; i++)
+    for (size_t l = 0; l < f.taille; l++)
     {
         k = bi_case_en_plus(k);
     }
@@ -25,9 +27,15 @@ int     dichoto(int n, big_int f, int i)
     while ( bi_is_eq(j, zeros) == 0 )
     {
         if (bi_is_sup(j, zeros) == 1)
-            c += c/2;
+        {
+            a = c;
+            c = (a+b)/2;
+        }
         else
-            c-= c/2;
+        {
+            b = c;
+            c = (a+b)/2;
+        }
     }
     return c;
 }

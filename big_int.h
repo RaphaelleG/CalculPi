@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define TAILLE  5
+#define TAILLE  3
 #define MULT    100000000
 #define LIM     2147483647
 // si bug de calcul chelou, penser à + ou - 1 dans les calculs

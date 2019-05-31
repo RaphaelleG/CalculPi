@@ -7,16 +7,13 @@
 
 int main(int argc, char const *argv[]) {
 
-    // int a = 2147483640;
-    // int b = 27;
-    // printf("%d\n", a+b);
-    // printf("%d\n", a+b);
-    //
-    //
-    // printf("%d\n", a+b+LIM);
-    big_int test = bi_calcul(8, 7, 1);
-    bi_print(test);
-    bi_free(test);
+    // big_int test = bi_calcul(1, 10, 9);
+    // bi_print(test);
+    // bi_free(test);
+
+    // big_int testpow = bi_int_pow_to_bi(2, 64);
+    // bi_print(testpow);
+    // bi_free(testpow);
 
     return 0;
 }
