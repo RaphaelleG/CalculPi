@@ -12,4 +12,6 @@ int     mn(int m1, int m2);
 
 int     dichoto(int n, big_int *f, int m);
 
+int     first_int(int n);
+
 #endif

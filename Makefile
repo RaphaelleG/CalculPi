@@ -4,6 +4,7 @@ FILES = \
 			main.c \
 			big_int.c \
 			utils.c \
+			machin.c \
 
 OBJ = $(FILES:%.c=%.o)
 

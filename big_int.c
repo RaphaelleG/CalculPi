@@ -233,6 +233,7 @@ big_int*             bi_calcul(int num, int den, int exp)
     big_int *res = bi_alloc(TAILLE);
     big_int *x = bi_int_to_bi(num);
     big_int *y = bi_int_pow_to_bi(den, exp);
+    y = bi_fois_by_int(y, exp);
     printf("y = ");
     bi_print(y);
     // tmp = [0] au début
@@ -267,7 +268,8 @@ big_int*             bi_calcul(int num, int den, int exp)
                 res->nombre[i] = f->nombre[0] / y->nombre[0];
             else
             {
-                res->nombre[i] = bi_div_int_by_bi(f->nombre[0], y);
+                printf("taille trop grande\n" );
+                //res->nombre[i] = bi_div_int_by_bi(f->nombre[0], y);
             }
         }
         else
@@ -275,7 +277,8 @@ big_int*             bi_calcul(int num, int den, int exp)
             if (y->taille == 1)
                 res->nombre[i] = f->nombre[i-1]* MULT/y->nombre[0];
             else
-                res->nombre[i] =  bi_div_int_by_bi(f->nombre[i-1]*MULT, y);
+                printf("taille trop grande\n" );
+                // res->nombre[i] =  bi_div_int_by_bi(f->nombre[i-1]*MULT, y);
         }
 
         bi_case_en_plus(x);

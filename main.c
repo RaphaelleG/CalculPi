@@ -4,7 +4,7 @@
 
 #include "big_int.h"
 
-
+void        machin();
 int main(int argc, char const *argv[]) {
 
     // big_int *test = bi_calcul(1, 10, 9);
@@ -15,6 +15,8 @@ int main(int argc, char const *argv[]) {
     // big_int testpow = bi_int_pow_to_bi(2, 64);
     // bi_print(testpow);
     // bi_free(testpow);
+
+    //machin();
 
     return 0;
 }

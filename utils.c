@@ -49,3 +49,17 @@ int     dichoto(int n, big_int *f, int m)
 
     return c;
 }
+
+int     first_int(int n)
+{
+    int l = MULT;
+    int j;
+    for (size_t i = 8; i >=0; i--) {
+        j = n%l;
+        l/= 10;
+        j = j/l;
+        if (j!=0)
+            return j;
+    }
+    return n;
+}
