@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define TAILLE  3
+#define TAILLE  13
 #define MULT    100000000
 #define LIM     2147483647
 // si bug de calcul chelou, penser à + ou - 1 dans les calculs
@@ -38,6 +38,7 @@ void                bi_case_en_moins(big_int *f);
 int                 bi_is_eq(big_int *f1, big_int *f2);
 
 int                 bi_is_sup(big_int *f1, big_int *f2);
+void                bi_same_size(big_int *f1, big_int *f2);
 
 // addition et soustraction de deux big_int avec modification de la taille
 big_int*            bi_add(big_int *f1, big_int *f2);

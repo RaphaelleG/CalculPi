@@ -42,35 +42,40 @@ big_int*             bi_int_pow_to_bi(int x, int n)
 
 void             bi_case_en_plus(big_int *f)
 {
-    int * nombre = (int *)malloc((f->taille+1) * sizeof(int));
+    int * nombre = (int *) malloc((f->taille+1) * sizeof(int));
 
     for (size_t i = 0; i < f->taille; i++) {
         nombre[i] = f->nombre[i];
     }
     nombre[f->taille] = 0;
     free(f->nombre);
+    f->taille +=1;
     f->nombre = nombre;
+
 }
+
 void             bi_case_au_debut(big_int *f)
 {
-    int *nombre = (int *)malloc((f->taille+1) * sizeof(int));
+    int *nombre = (int *) malloc((f->taille+1) * sizeof(int));
 
     nombre[0] = 0;
     for (size_t i = 0; i < f->taille; i++) {
         nombre[i+1] =f->nombre[i];
     }
     free(f->nombre);
+    f->taille +=1;
     f->nombre = nombre;
 }
 void             bi_case_en_moins(big_int *f)
 {
-    int * nombre = (int *)malloc((f->taille-1) * sizeof(int));
+    int * nombre = (int *) malloc((f->taille-1) * sizeof(int));
 
     for (size_t i = 0; i < f->taille-1; i++) {
         nombre[i] = f->nombre[i+1];
     }
 
     free(f->nombre);
+    f->taille -=1;
     f->nombre = nombre;
 }
 
@@ -78,7 +83,7 @@ void             bi_case_en_moins(big_int *f)
 
 int                 bi_is_eq(big_int *f1, big_int *f2)
 {
-    // on suppose f1.taille == f2.taille
+    bi_same_size(f1,f2);
     for (size_t i = 0; i < f1->taille; i++)
     {
         if (f1->nombre[i] != f2->nombre[i])
@@ -88,7 +93,7 @@ int                 bi_is_eq(big_int *f1, big_int *f2)
 }
 int                 bi_is_sup(big_int *f1, big_int *f2)
 {
-    // on suppose f1.taille == f2.taille
+    bi_same_size(f1,f2);
     for (size_t i = 0; i < f1->taille; i++)
     {
         if (f1->nombre[i] > f2->nombre[i])
@@ -99,9 +104,7 @@ int                 bi_is_sup(big_int *f1, big_int *f2)
     return 1;
 }
 
-
-
-big_int*             bi_add(big_int *f1, big_int *f2)
+void                bi_same_size(big_int *f1, big_int *f2)
 {
     if (f1->taille != f2->taille)
     {
@@ -118,7 +121,11 @@ big_int*             bi_add(big_int *f1, big_int *f2)
                 bi_case_au_debut(f1);
         }
     }
+}
 
+big_int*             bi_add(big_int *f1, big_int *f2)
+{
+    bi_same_size(f1,f2);
     big_int *res = bi_alloc(f1->taille +1);
     int retenue = 0;
 
@@ -137,6 +144,7 @@ big_int*             bi_add(big_int *f1, big_int *f2)
 
     }
     res->nombre[0] = retenue;
+
     if (retenue == 0)
         bi_case_en_moins(res);
     return res;
@@ -146,21 +154,7 @@ big_int*             bi_add(big_int *f1, big_int *f2)
 
 big_int*             bi_minus(big_int *f1, big_int *f2)
 {
-    if (f1->taille != f2->taille)
-    {
-        if(f1->taille == mx(f1->taille, f2->taille))
-        {
-            int t = f1->taille-f2->taille;
-            for (size_t i = 0; i < t; i++)
-                bi_case_au_debut(f2);
-        }
-        else
-        {
-            int t = f2->taille-f1->taille;
-            for (size_t i = 0; i <t; i++)
-                bi_case_au_debut(f1);
-        }
-    }
+    bi_same_size(f1,f2);
 
     big_int *res = bi_alloc(f1->taille);
     int retenue = 0;
