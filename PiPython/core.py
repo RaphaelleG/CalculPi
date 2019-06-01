@@ -15,18 +15,20 @@ def is_eq(k, m):
     res = Decimal(t[0])/(Decimal(t[1]))
 
     res = Decimal(res)*Decimal(4)/Decimal(3.15)
+    t = Decimal(res).compare(Decimal(10)**Decimal(-m));
 
-    return Decimal(res).compare(Decimal(10) ** Decimal(-m));
+    return t
 
 
 def get_N(m):
     n=1
-
+    # Pour trouver l'ordre de grandeur du n
     while ( is_eq(n,m) == 1):
         n = n*10
 
     min = n
     max = n*10
+    # Pour trouver précisement le n
     while(min < max):
         print("min = ",min)
         print("max = ", max)
@@ -60,6 +62,7 @@ def main():
 
     lim = get_N(100)
     print (lim)
+    # renvoie 58 donc pas assez de bonnes décimales
 
     tab = get_array_formula_pi(lim)
     frac = []
