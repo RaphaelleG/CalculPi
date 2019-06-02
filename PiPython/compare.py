@@ -19,37 +19,38 @@ def get_tupple_a(k):
     b = 2*k+1
     return(a,b)
 
+def get_tupple_m(n):
+    a = (-1)**n *(4*239**(2*n+1) - 5**(2*n+1))
+    b = (5*239)**(2*n+1)*(2*n+1)
+
+    return (a,b)
+
 def get_array_r(lim):
-    a = []
     b = 0
     c = []
-    a.append((0,0))
     for i in range(1,lim):
-        a.append(get_tupple_r(i))
-        b = Decimal(b) + (Decimal(6)*(Decimal(a[i][0])/ Decimal(a[i][1])))
+        a = get_tupple_r(i)
+        b = Decimal(b) + (Decimal(6)*(Decimal(a[0])/ Decimal(a[1])))
         b2 = Decimal(b) ** Decimal('0.5')
         c.append(b2)
     return c;
 
 def get_array_ra(lim):
-    a = []
     b = 0
     c = []
-    a.append((0,0))
     for i in range(1,lim):
-        a.append(get_tupple_ra(i))
-        b = Decimal(b) + (Decimal(12)*(Decimal(a[i][0])/ Decimal(a[i][1])))
+        a = get_tupple_ra(i)
+        b = Decimal(b) + (Decimal(12)*(Decimal(a[0])/ Decimal(a[1])))
         b2 = Decimal(b) ** Decimal('0.5')
         c.append(b2)
     return c;
 
-def get_array_a(lim):
-    a = []
+def get_array_a(lim, fct):
     b = 0
     c = []
     for i in range(0,lim):
-        a.append(get_tupple_a(i))
-        b = Decimal(b) + (Decimal(a[i][0])/ Decimal(a[i][1]))
+        a = fct(i)
+        b = Decimal(b) + ( Decimal(4) * (Decimal(a[0])/ Decimal(a[1])))
         c.append(b)
     return c;
 
@@ -63,13 +64,17 @@ def main():
     # calculer x décimales avec riemann alterné
     res2 = get_array_ra(lim+1)
     # calculer x décimales avec arctan
-    res3 = get_array_a(lim)
+    res3 = get_array_a(lim, get_tupple_a)
+
+    # calculer x decimales avec machin
+    res4 = get_array_a(lim, get_tupple_m)
 
     # comparer les convergences
     x = range(0, lim)
     plt.plot(x, res1)
-    plt.plot(x, res2)
     plt.plot(x, res3)
+    plt.plot(x, res2)
+    plt.plot(x, res4)
 
     plt.show()
 
