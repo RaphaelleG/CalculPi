@@ -101,8 +101,8 @@ def main():
 	# comparer les convergences
 	x = range(0, lim)
 	plt.plot(x, res1, label='Série de Riemann')
-	plt.plot(x, res3, label='Série de Riemann alternée')
-	plt.plot(x, res2, label='Développement d\'Arctan')
+	plt.plot(x, res3, label='Développement d\'Arctan')
+	plt.plot(x, res2, label='Série de Riemann alternée')
 	plt.plot(x, res4, label='Formule de Machin')
 
 	legend = plt.legend(loc='upper center', shadow=True, fontsize='x-large')
