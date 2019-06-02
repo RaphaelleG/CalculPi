@@ -42,7 +42,7 @@ def get_N(m):
 	n=1
 	# Pour trouver l'ordre de grandeur du n
 	while (is_eq(n*10, m) == 1):
-		n = n*10
+		n *= 10
 
 	min = n
 	max = n*10
