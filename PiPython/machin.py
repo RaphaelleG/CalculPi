@@ -1,6 +1,21 @@
 #!/usr/bin/python3
 
 from decimal import *
+import math
+
+
+def show_progress_bar(bar_length, completed, total):
+    bar_length_unit_value = (total / bar_length)
+    completed_bar_part = math.ceil(completed / bar_length_unit_value)
+    progress = "*" * completed_bar_part
+    remaining = " " * (bar_length - completed_bar_part)
+    percent_done = "%.2f" % ((completed / total) * 100)
+
+    text = f' [{progress}{remaining}] {percent_done}%'
+    if completed != total:
+        print(text, end='\r')
+    else:
+        print(text)
 
 
 def get_tupple(n):
@@ -32,7 +47,6 @@ def get_N(m):
     max = n*10
     # Pour trouver précisement le n
     while(min < max):
-
         n = int ((min+max)/2)
         t = is_eq(n, m)
 
@@ -45,11 +59,15 @@ def get_N(m):
     return n
 
 
-def get_array_formula_pi(lim):
-    a = []
+def get_pi(lim):
+    pi = Decimal(0)
+    print("Calcul de pi :")
     for i in range(0, lim):
-        a.append(get_tupple(i))
-    return (a)
+        b = get_tupple(i)
+        pi = pi + Decimal(b[0])/Decimal(b[1])
+        show_progress_bar(30, i+1, lim)
+    pi = pi * Decimal(4)
+    return (pi)
 
 
 
@@ -66,17 +84,7 @@ def main():
     print (lim)
     # renvoie 58 donc pas assez de bonnes décimales
 
-    tab = get_array_formula_pi(lim+5)
-    frac = []
-
-    for i in tab:
-        frac.append(Decimal(i[0])/Decimal(i[1]))
-
-    my_pi = 0
-    for j in frac:
-        my_pi = Decimal(my_pi)+Decimal(j)
-
-    my_pi = Decimal(my_pi)*Decimal(4)
+    my_pi = get_pi(lim+5)
 
     print(my_pi)
 
