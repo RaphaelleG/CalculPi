@@ -33,12 +33,6 @@ def get_tupple_m(n):
 	b = (5*239)**(2*n+1)*(2*n+1)
 	return (a,b)
 
-# IN PROGRESS
-# # Formule de Chudnovsky
-# def get_tupple_chud(n) :
-# 	a = (-1)**n * 12 * fact(6*n) * (13491409 + (545150134*n))
-# 	b = (fact(3*n)) * (fact(n))**3 * (640320)**(3*n)
-# 	return (a,b)
 
 def get_array_r(lim):
 	b = 0
@@ -69,15 +63,6 @@ def get_array_a(lim, fct):
 		c.append(b)
 	return c;
 
-#IN PROGRESS
-# def get_array_chud(lim):
-# 	b = 0
-# 	c = []
-# 	for i in range(0,lim):
-# 		a = get_tupple_chud(i)
-# 		b = Decimal(b) + (Decimal(1) * (Decimal(a[1])/ Decimal(a[0])))
-# 		c.append(b)
-# 	return c;
 
 def main():
 	lim = 100
@@ -92,11 +77,6 @@ def main():
 
 	# calculer x decimales avec machin
 	res4 = get_array_a(lim, get_tupple_m)
-
-	# IN PROGRESS
-	# calculer x decimales avec machin
-	# res5 = get_array_chud(lim)
-
 
 	# comparer les convergences
 	x = range(0, lim)
